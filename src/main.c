@@ -12,11 +12,9 @@ bool parse_args(int argc, char **argv, int params[4])
 {
     int i = 0;
 
-    if (argc != 5) {
-        printf("USAGE: %s <nb_villagers> <pot_size>"
-            " <nb_fights> <nb_refills>\n", argv[0]);
-        return false;
-    }
+    if (argc != 5)
+        return printf("USAGE: %s <nb_villagers> <pot_size>"
+            " <nb_fights> <nb_refills>\n", argv[0]), false;
     for (i = 0; i < 4; i++)
         params[i] = atoi(argv[i + 1]);
     for (i = 0; i < 4; i++) {
