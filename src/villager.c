@@ -30,8 +30,10 @@ bool take_potion(state_t *state, int id)
         " I see %d servings left.\n",
         id, state->pot_servings);
     while (state->pot_servings == 0) {
-        if (state->druid_done)
-            return pthread_mutex_unlock(&state->mutex), false;
+        if (state->druid_done) {
+            pthread_mutex_unlock(&state->mutex);
+            return false;
+        }
         call_druid(state, id);
     }
     state->pot_servings--;
