@@ -26,9 +26,9 @@ bool do_refill(state_t *state)
     state->druid_done = done;
     if (done)
         printf("Druid: I'm out of viscum. I'm going back to... zZz\n");
-    pthread_mutex_unlock(&state->mutex);
     for (int i = 0; i < to_wake; i++)
         sem_post(&state->pot_refilled);
+    pthread_mutex_unlock(&state->mutex);
     return done;
 }
 
