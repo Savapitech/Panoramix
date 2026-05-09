@@ -31,6 +31,11 @@
             valgrind
           ];
       };
+      bonus = pkgs.mkShell {
+        packages = [
+          (pkgs.python3.withPackages (ps: [ ps.matplotlib ps.numpy ]))
+        ];
+      };
     });
 
     formatter = forAllSystems (pkgs: _: pkgs.alejandra);
