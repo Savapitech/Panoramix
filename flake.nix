@@ -28,6 +28,7 @@
             llvm_21
             gnumake
             criterion
+            valgrind
           ];
       };
     });

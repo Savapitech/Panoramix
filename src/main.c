@@ -17,9 +17,9 @@ bool parse_args(int argc, char **argv, int params[4])
             " <nb_fights> <nb_refills>\n", argv[0]);
         return false;
     }
-    for (i = 0; i < 4; i++)
-        params[i] = atoi(argv[i + 1]);
     for (i = 0; i < 4; i++) {
+        params[i] = atoi(argv[i + 1]);
+
         if (params[i] <= 0) {
             printf("USAGE: %s <nb_villagers> <pot_size>"
                 " <nb_fights> <nb_refills>\n", argv[0]);
@@ -42,11 +42,11 @@ bool run_simulation(int params[4])
     if (!init_state(&state, params[1], params[3]))
         return false;
     pthread_create(&druid, NULL, druid_thread, &state);
-    for (i = 0; i < params[0]; i++) {
+    for (i = 0; i < params[0] && i < MAX_VILLAGERS; i++) {
         vargs[i] = (villager_args_t){i, params[2], &state};
         pthread_create(&villagers[i], NULL, villager_thread, &vargs[i]);
     }
-    for (i = 0; i < params[0]; i++)
+    for (i = 0; i < params[0] && i < MAX_VILLAGERS; i++)
         pthread_join(villagers[i], NULL);
     state.all_done = true;
     sem_post(&state.druid_wake);

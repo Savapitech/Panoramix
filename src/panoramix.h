@@ -17,6 +17,7 @@
 
     #define RETURN_SUCCESS 0
     #define RETURN_FAIL 84
+    #define MAX_VILLAGERS 50000
 
 typedef struct {
     int pot_servings;
